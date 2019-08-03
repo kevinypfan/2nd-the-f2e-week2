@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&display=swap");
+
+$light-black: #525252;
+$dark-black: #001f1d;
+$brown: #4b4b4b;
+$blue: #3f869b;
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto Slab", serif;
+}
+
+.dummy-space {
+  width: 16px;
+}
+
+@import "freecell";
