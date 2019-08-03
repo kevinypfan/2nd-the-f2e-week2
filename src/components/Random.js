@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import helper from "../utils/helper";
 import Poker from "./Poker";
+import Pokers from "./Pokers";
 const Random = props => {
   const [groups, setGroups] = useState([]);
 
@@ -25,15 +26,11 @@ const Random = props => {
   }, []);
   return (
     <div className="random">
-      {groups.map(group => {
+      {groups.map((group, index) => {
         return (
-          <div className="group-list">
+          <div className="group-list" key={index}>
             {group.map(el => {
-              return (
-                <div className="group-item">
-                  <Poker name={el} />
-                </div>
-              );
+              return <Poker key={el} pokers={Pokers} name={el} />;
             })}
           </div>
         );
