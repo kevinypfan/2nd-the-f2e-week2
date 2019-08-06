@@ -1,7 +1,17 @@
 import React, { useEffect } from "react";
+import { useDrag, DragPreviewImage } from "react-dnd";
+import ItemTypes from "../ItemTypes";
+
 const files = require.context("../assets/pokers", true, /\.svg$/);
 
 const Poker = props => {
+  const [{ isDragging }, drag, preview] = useDrag({
+    item: { type: ItemTypes.POKER, name: props.name },
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging()
+    }),
+    canDrag: monitor => props.isCanDrag
+  });
   // let cardPath;
   // useEffect(() => {
   // const reqSvgs = require.context("../assets/pokers", true, /\.svg$/);
@@ -21,9 +31,18 @@ const Poker = props => {
   // };
   // return <div className="group-item" style={CardStyle} />;
   return (
-    <div className="group-item">
-      <img src={files(`./${props.name}.svg`)} />
-    </div>
+    <>
+      <DragPreviewImage connect={preview} src={files(`./${props.name}.svg`)} />
+      <div
+        className="group-item"
+        ref={drag}
+        style={{
+          opacity: isDragging ? 0.5 : 1
+        }}
+      >
+        <img src={files(`./${props.name}.svg`)} />
+      </div>
+    </>
   );
 };
 
