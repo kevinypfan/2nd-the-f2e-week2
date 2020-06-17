@@ -19,6 +19,7 @@ const GroupList = props => {
             key={el}
             name={el}
             isCanDrag={props.group.length - 1 === index}
+            source={props.source}
           />
         );
       })}

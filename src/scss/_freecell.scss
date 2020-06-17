@@ -9,7 +9,8 @@
       display: flex;
       justify-content: space-around;
       .group-list {
-        max-width: 110px;
+        width: 110px;
+        min-height: 158px;
         .group-item {
           height: 48px;
           width: 110px;

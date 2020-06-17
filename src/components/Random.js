@@ -1,33 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import context from "../context";
+
 import helper from "../utils/helper";
 import GroupList from "./GroupList";
 
 const Random = props => {
-  const [groups, setGroups] = useState([]);
+  const reducer = useContext(context);
+  const { random, dispatch } = reducer;
 
-  useEffect(() => {
-    const suits = ["spades", "hearts", "diamonds", "clubs"];
-    const cards = suits.reduce((a, b) => {
-      let temp = [];
-      for (let i = 1; i <= 13; i++) {
-        temp.push(`${b}-${i}`);
-      }
-      return a.concat(temp);
-    }, []);
-    const setup = [];
-    helper.shuffle(cards);
-    for (let i = 0; i < 8; i++) {
-      setup.push([]);
-    }
-    cards.forEach((el, index) => {
-      setup[index % 8].push(el);
-    });
-    setGroups(setup);
-  }, []);
+  console.log("random=", random);
   return (
     <div className="random">
-      {groups.map((group, index) => {
-        return <GroupList group={group} key={index} />;
+      {random.map((group, index) => {
+        return <GroupList group={group} key={index} source="random" />;
       })}
     </div>
   );

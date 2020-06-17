@@ -6,7 +6,7 @@ const files = require.context("../assets/pokers", true, /\.svg$/);
 
 const Poker = props => {
   const [{ isDragging }, drag, preview] = useDrag({
-    item: { type: ItemTypes.POKER, name: props.name },
+    item: { type: ItemTypes.POKER, name: props.name, source: props.source },
     collect: monitor => ({
       isDragging: !!monitor.isDragging()
     }),

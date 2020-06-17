@@ -5,7 +5,7 @@ import context from "../context";
 const Freedom = props => {
   const reducer = useContext(context);
   const { freedom, dispatch } = reducer;
-  console.log(freedom);
+  // console.log(freedom);
   return (
     <div className="freedom">
       {freedom.map((el, index) => {

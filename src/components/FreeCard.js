@@ -7,14 +7,29 @@ const FreeCard = props => {
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.POKER,
     drop: item => {
-      if (props.type === "freedom") {
+      if (props.type === "freedom" && item.source === "random") {
+        props.dispatch({
+          type: "DROP_FREEDOM",
+          index: props.index,
+          payload: item.name
+        });
+        props.dispatch({
+          type: "POP_RANDOM",
+          payload: item.name
+        });
+      }
+      if (props.type === "freedom" && item.source === "freedom") {
+        props.dispatch({
+          type: "POP_FREEDOM",
+          payload: item.name
+        });
         props.dispatch({
           type: "DROP_FREEDOM",
           index: props.index,
           payload: item.name
         });
       }
-      console.log("droped: ", props.index, `(${props.type})`);
+      console.log("droped: ", props.index, `(${props.source})`);
     },
     collect: monitor => ({
       isOver: !!monitor.isOver()
@@ -22,7 +37,9 @@ const FreeCard = props => {
   });
   return (
     <div className="card-target" ref={drop}>
-      {!!props.name && <Poker name={props.name} isCanDrag={true} />}
+      {!!props.name && (
+        <Poker name={props.name} isCanDrag={true} source="freedom" />
+      )}
     </div>
   );
 };
